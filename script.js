@@ -4,32 +4,15 @@ function computerMove() {
   return moves[Math.floor(Math.random()*moves.length)];
 }
 
-function playRound(playerChoice, computerChoice) {
-  if (playerChoice == "rock") {
-    if (computerChoice == "paper") {
-      return false;
-    } else if (computerChoice == "scissors") {
-      return true;
-    }
-  } else if (playerChoice == "paper") {
-    if (computerChoice == "scissors") {
-      return false;
-    } else if (computerChoice == "rock") {
-      return true;
-    }
-  } else if (playerChoice == "scissors") {
-    if (computerChoice == "rock") {
-      return false;
-    } else if (computerChoice == "paper") {
-      return true;
-    }
+function resultText(result, playerChoice, computerChoice) {
+  if (result == true) {
+    return "You win! " + playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1) + " beats " + computerChoice + "!";
+  } else if (result == false) {
+    return "You lose! " + computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1) + " beats " + playerChoice + "!";
   }
 }
 
-// TODO: Occasionally this function does not work, and just returns "undefined" to the console. Unsure why
-// seems to be most common when player makes the same choice twice in a row
-// problem goes away entirely when I uncomment the console.log() commands
-function play() {
+function playRound() {
   let playerChoiceMade = false;
   let playerChoice = "";
   let promptText = "What is your move?"
@@ -42,17 +25,34 @@ function play() {
       promptText = "Sorry, that's not a valid option. Please choose rock, paper, or scissors!"
     }
   }
-  //console.log("Player chose " + playerChoice);
 
   let computerChoice = computerMove();
-  //console.log("Computer chose " + computerChoice);
 
-  let result = playRound(playerChoice, computerChoice);
-  //console.log("Result is " + result);
+  if (playerChoice == computerChoice) {
+    return "It's a draw! You both chose " + playerChoice + ".";
+  } else if (playerChoice == "rock") {
+    if (computerChoice == "paper") {
+      return resultText(false, playerChoice, computerChoice);
+    } else if (computerChoice == "scissors") {
+      return resultText(true, playerChoice, computerChoice);
+    }
+  } else if (playerChoice == "paper") {
+    if (computerChoice == "scissors") {
+      return resultText(false, playerChoice, computerChoice);
+    } else if (computerChoice == "rock") {
+      return resultText(true, playerChoice, computerChoice);
+    }
+  } else if (playerChoice == "scissors") {
+    if (computerChoice == "rock") {
+      return resultText(false, playerChoice, computerChoice);
+    } else if (computerChoice == "paper") {
+      return resultText(true, playerChoice, computerChoice);
+    }
+  }
+}
 
-  if (result == true) {
-    console.log("You win! " + playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1) + " beats " + computerChoice + "!");
-  } else if (result == false) {
-    console.log("You lose! " + computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1) + " beats " + playerChoice + "!");
+function game(rounds = 5) {
+  for (iterator = 0; iterator < rounds; iterator++) {
+    console.log(playRound());
   }
 }
