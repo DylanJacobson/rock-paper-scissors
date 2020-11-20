@@ -27,37 +27,21 @@ function resultText(result, playerChoice, computerChoice) {
 function playRound(playerChoice) {
   let computerChoice = computerMove();
   playerChoice = playerChoice.toLowerCase();
-  if (playerChoice == computerChoice) {
-    return "It's a draw! You both chose " + playerChoice + ".";
-  } else if (playerChoice == "rock") {
-    if (computerChoice == "paper") {
-      gamesLost += 1;
-      return resultText(false, playerChoice, computerChoice);
-    } else if (computerChoice == "scissors") {
-      gamesWon += 1;
-      return resultText(true, playerChoice, computerChoice);
-    }
-  } else if (playerChoice == "paper") {
-    if (computerChoice == "scissors") {
-      gamesLost += 1;
-      return resultText(false, playerChoice, computerChoice);
-    } else if (computerChoice == "rock") {
-      gamesWon += 1;
-      return resultText(true, playerChoice, computerChoice);
-    }
-  } else if (playerChoice == "scissors") {
-    if (computerChoice == "rock") {
-      gamesLost += 1;
-      return resultText(false, playerChoice, computerChoice);
-    } else if (computerChoice == "paper") {
-      gamesWon += 1;
-      return resultText(true, playerChoice, computerChoice);
-    }
-  }
+  if (playerChoice === computerChoice) return "It's a draw! You both chose " + playerChoice + ".";
+
+  if (playerChoice === 'rock' && computerChoice === 'scissors' ||
+      playerChoice === 'paper' && computerChoice === 'rock' ||
+      playerChoice === 'scissors' && computerChoice === 'paper') {
+        gamesWon += 1;
+        return resultText(true, playerChoice, computerChoice); 
+      } else {
+        gamesLost += 1;
+        return resultText(false, playerChoice, computerChoice);
+      }
 }
 
-for (btnIter = 0; btnIter < buttons.length; btnIter++) {
-  buttons[btnIter].addEventListener('click', function (event) {
+for (i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click', function (event) {
     gamesPlayed += 1;
     let result = playRound(this.textContent);
     if (gamesWon < 5 && gamesLost < 5) {
