@@ -1,7 +1,3 @@
-.mono {
-  font-family: monospace;
-}
-
 .main {
   background: rgba(0, 0, 0, 0.8);
   color: white;
@@ -15,14 +11,16 @@
 
 .main a, .main a:visited{
   color: white;
+  text-decoration: underline;
 }
 
 .main a:hover {
   color: silver;
+  text-decoration: underline;
 }
 
-.hint {
-  font-size: 14px;
+button {
+  font-weight: bold;
 }
 
 body {
