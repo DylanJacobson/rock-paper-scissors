@@ -7,13 +7,14 @@ let gameScore = {
   draw: 0,
 };
 
-
+// creates link to restart game
 const reloadLink = document.createElement('a');
 reloadLink.textContent = "Play again?";
 reloadLink.addEventListener('click', function () {
   location.reload();
 });
 
+// adds game controls to each button
 document.querySelectorAll('button').forEach(button => {
   button.addEventListener('click', function () {
     playRound(this.id);
